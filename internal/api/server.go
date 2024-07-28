@@ -14,7 +14,10 @@ func StartServer(config config.AppConfig) {
 	app := fiber.New(fiber.Config{
 		DisableStartupMessage: false,
 	})
-	app.Use(cors.New())
+	app.Use(cors.New(cors.Config{
+		AllowOrigins: "*",
+		AllowMethods: "GET,POST,HEAD,PUT,DELETE,PATCH",
+	}))
 
 	rh := rest.RestHandler{
 		App: app,
